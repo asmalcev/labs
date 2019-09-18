@@ -1,0 +1,41 @@
+sizeof(c)=1	sizeof(uc)=1
+sizeof(i)=4	sizeof(u)=4	sizeof(s)=2	sizeof(l)=8
+sizeof(f)=4	sizeof(d)=8
+
+CHAR_MAX : c=127 uc=127
+CHAR_MAX+1 : c=-128 uc=128
+CHAR_MIN : c=-128 uc=128
+UCHAR_MAX : c=-1 uc=255
+UCHAR_MAX+1 : c=0 uc=0
+-5 : c=-5 uc=251
+char and unsigned char -5>5 : 0
+
+SHRT_MAX : c=-1 uc=255 s=32767
+SHRT_MAX+1 : s=-32768
+-32768 : c=0 uc=0
+0 : c=0 uc=0 s=0
+INT_MAX : i=2147483647 u=2147483647 l=2147483647
+INT_MAX+1 : i=-2147483648 u=2147483648 l=2147483648
+INT_MIN : i=-2147483648 u=2147483648 l=-2147483648
+UINT_MAX : i=-1 u=4294967295 l=4294967295
+-5 : i=-5 u=4294967291
+int and unsigned int -5>5 : 1
+char and unsigned int -5>5 : 1
+
+i=5.1 : i=5
+i=5.9 : i=5
+FLT_MAX : f=3.40282e+38 d=3.40282e+38
+FLT_MIN : f=1.17549e-38 d=1.17549e-38
+FLT_EPSILON : f=1.19209e-07 d=1.19209e-07
+1e10 : f=10000000000.000000
+1e11 : f=99999997952.000000
+1234567890 : f=1234567936.000000
+DBL_MAX : d=1.79769e+308
+DBL_MIN : d=2.22507e-308
+DBL_EPSILON : d=2.22045e-16
+1e15+1 : d=1000000000000001.000000
+1e16+1 : d=10000000000000000.000000
+1 : f=0.000000
+1 : f=1.000000
+1 : d=1.000000
+1000 : d=0.000000

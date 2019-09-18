@@ -1,2 +1,3 @@
 # labs
-*** Rep for labs ***
+
+## Repository with programming labs

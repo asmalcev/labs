@@ -16,6 +16,7 @@
 \usepackage{karnaugh-map}
 \usepackage{tikz,xcolor}
 \usepackage{listings}
+\usepackage{txfonts}
 
 \titleformat{\section}[hang]
   {\bfseries}
@@ -29,9 +30,6 @@
   {}
   {0em}
   {\hspace{-0.4pt}\large \thesubsection\hspace{0.6em}}
-
-%\linespread{1.3} % полуторный интервал
-%\renewcommand{\rmdefault}{ftm} % Times New Roman
 
 \newcommand{\nx}{\overline{x}}
 \newcommand{\p}{0.31}
@@ -92,11 +90,33 @@
 {\large\bf Вариант 14}
 \end{center}
 \subsection{Задание 1}
-В программе вычисляется значение функции, с использованием тернарного оператора. 
+Вычислить значение функции\\
+\begin{equation*}
+f(m,n) = 
+ \begin{cases}
+   \frac 5 m - \frac n 5 \text{, если $ n > -5, m \neq 0$}\\
+   3m + n^2 \text{, если $ n \leq -5$}\\
+   2mn \text{ в остальных случаях}
+ \end{cases}
+\end{equation*}
+используя тернарный оператор.
 \lstinputlisting[language=c, frame=single, caption=Программа первого задания, label=lab2_2, style=CStyle]{../firstTask.c}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+Исходные данные & Вывод программы\\
+\hline
+m = 2, n = 4 & f = 1.700000\\
+m = 3, n = -8 & f = 73.000000\\
+m = 0, n = 0 & f = 0.000000\\
+\hline
+\end{tabular}\\
+\end{center}
 
 \subsection{Задание 2}
-В программе вычисляется значение по указанной формуле, с использованием функции математической библиотеки.
+Вычислить значение функции
+$S = \frac{ \sin \alphaup^3 + 2\cos^2\betaup }{\sqrt{2,5\alphaup + 3\betaup  + \sqrt{2}}\ln \betaup }$
+\vspace{0.5cm}
 \lstinputlisting[language=c, frame=single, caption=Программа второго задания, label=lab2_2, style=CStyle]{../secondTask.c}
 
 \subsection{Задание 3}
