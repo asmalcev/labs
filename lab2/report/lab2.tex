@@ -99,7 +99,9 @@ f(m,n) =
    2mn \text{ в остальных случаях}
  \end{cases}
 \end{equation*}
-используя тернарный оператор.
+используя тернарный оператор.\\
+\textit{Исходные данные:} так как значения m и n могут быть любыми, объявим соответствующие переменные типа double.\\
+\textit{Результирующие данные:} значение функции f также типа double.
 \lstinputlisting[language=c, frame=single, caption=Программа первого задания, label=lab2_2, style=CStyle]{../firstTask.c}
 \begin{center}
 \begin{tabular}{|c|c|}
@@ -115,17 +117,40 @@ m = 0, n = 0 & f = 0.000000\\
 
 \subsection{Задание 2}
 Вычислить значение функции
-$S = \frac{ \sin \alphaup^3 + 2\cos^2\betaup }{\sqrt{2,5\alphaup + 3\betaup  + \sqrt{2}}\ln \betaup }$
+$S = \frac{ \sin \alphaup^3 + 2\cos^2\betaup }{\sqrt{2,5\alphaup + 3\betaup  + \sqrt{2}}\ln \betaup }$\\
+\textit{Исходные данные:} типы $\alphaup$ и $\betaup$ не указаны в задании, поэтому будут double.\\
+\textit{Результирующие данные:} значение функции S также типа double.
 \vspace{0.5cm}
 \lstinputlisting[language=c, frame=single, caption=Программа второго задания, label=lab2_2, style=CStyle]{../secondTask.c}
 
 \subsection{Задание 3}
-Программа, написанная с помощью вложенного условного оператора.
+В финале шашечной партии остались белая дамка и две черные пешки, позиции которых известны. Ход белых. Сможет ли дамка «срубить» хотя бы одну пешку? 
 \lstinputlisting[language=c, frame=single, caption=Программа третьего задания, label=lab2_2, style=CStyle]{../thirdTask.c}
 
 \subsection{Задание 4}
-В программе смоделирован арифметический цикл с помощью оператора цикла for. 
+Составить программу для определения, в каких двузначных числах удвоенная сумма цифр равна их произведению. 
 \lstinputlisting[language=c, frame=single, caption=Программа четвертого задания, label=lab2_2, style=CStyle]{../fourthTask.c}
+
+\subsection{Задание 5}
+Несколько деталей должны последовательно пройти обработку на каждом из трех станков. Продолжительности обработки каждой детали на каждом станке вводятся группами по три числа до исчерпания ввода (признак окончания ввода – задание некорректной тройки чисел). Сколько времени займет обработка всех деталей, если на каждом станке они могут обрабатываться только поштучно? 
+\lstinputlisting[language=c, frame=single, caption=Программа четвертого задания, label=lab2_2, style=CStyle]{../fivthTask.c}
+
+\subsection{Задание 6}
+Получить число, образованное записью цифр исходного числа N в обратном порядке. 
+\lstinputlisting[language=c, frame=single, caption=Программа четвертого задания, label=lab2_2, style=CStyle]{../sixthTask.c}
+
+\subsection{Задание 7}
+Вычислить значение суммы членов бесконечного ряда\\
+$ln x + 2$
+\lstinputlisting[language=c, frame=single, caption=Программа четвертого задания, label=lab2_2, style=CStyle]{../seventhTask.c}
+
+\subsection{Задание 8}
+В программе смоделирован арифметический цикл с помощью оператора цикла for. 
+\lstinputlisting[language=c, frame=single, caption=Программа четвертого задания, label=lab2_2, style=CStyle]{../eightTask.c}
+
+\subsection{Задание 9}
+В программе смоделирован арифметический цикл с помощью оператора цикла for. 
+\lstinputlisting[language=c, frame=single, caption=Программа четвертого задания, label=lab2_2, style=CStyle]{../ninthTask.c}
 
 
 \end{document}
