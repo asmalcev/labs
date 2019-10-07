@@ -65,6 +65,9 @@
 \textbf{Практическое задание №2}\\
 по дисциплине Основы программирования на тему\\ 
 \textbf{«Ветвления и циклы»}\\
+\begin{center}
+{\large\bf Вариант 14}
+\end{center}
 \vfill
 
 \begin{flushleft}
@@ -86,22 +89,23 @@
 Познакомиться с функциями из математической библиотеки, освоить операции отношения и логические операции, научиться грамотно программировать базовые алгоритмические структуры «ветвление» и «цикл».
 
 \section{Ход работы}
-\begin{center}
-{\large\bf Вариант 14}
-\end{center}
 \subsection{Задание 1}
 Вычислить значение функции\\
 \begin{equation*}
 f(m,n) = 
  \begin{cases}
-   \frac 5 m - \frac n 5 \text{, если $ n > -5, m \neq 0$}\\
+   \displaystyle\frac 5 m - \frac n 5 \text{, если $ n > -5, m \neq 0$}\\
    3m + n^2 \text{, если $ n \leq -5$}\\
    2mn \text{ в остальных случаях}
  \end{cases}
 \end{equation*}
 используя тернарный оператор.\\
 \textit{Исходные данные:} так как значения m и n могут быть любыми, объявим соответствующие переменные типа double.\\
-\textit{Результирующие данные:} значение функции f также типа double.
+\textit{Результирующие данные:} значение функции f также типа double.\\
+\begin{center}
+\includegraphics[scale=0.6]{lab2-1.png}
+Схема программы
+\end{center}
 \lstinputlisting[language=c, frame=single, caption=Программа первого задания, label=lab2_2, style=CStyle]{../firstTask.c}
 \begin{center}
 \begin{tabular}{|c|c|}
@@ -117,10 +121,14 @@ m = 0, n = 0 & f = 0.000000\\
 
 \subsection{Задание 2}
 Вычислить значение функции
-$S = \frac{ \sin \alphaup^3 + 2\cos^2\betaup }{\sqrt{2,5\alphaup + 3\betaup  + \sqrt{2}}\ln \betaup }$\\
+$S = \displaystyle\frac{ \sin \alphaup^3 + 2\cos^2\betaup }{\sqrt{2,5\alphaup + 3\betaup  + \sqrt{2}}\ln \betaup }$\\
 \textit{Исходные данные:} типы $\alphaup$ и $\betaup$ не указаны в задании, поэтому будут double.\\
 \textit{Результирующие данные:} значение функции S также типа double.
 \vspace{0.5cm}
+\begin{center}
+\includegraphics[scale=0.6]{lab2-2.png}
+Схема программы
+\end{center}
 \lstinputlisting[language=c, frame=single, caption=Программа второго задания, label=lab2_2, style=CStyle]{../secondTask.c}
 
 \subsection{Задание 3}
@@ -141,7 +149,8 @@ $S = \frac{ \sin \alphaup^3 + 2\cos^2\betaup }{\sqrt{2,5\alphaup + 3\betaup  + \
 
 \subsection{Задание 7}
 Вычислить значение суммы членов бесконечного ряда\\
-$ln x + 2$
+$S = ln x + 2[\frac {a} {2x+a} + \frac {a^3} {3(2x+a)^3} + \frac {a^5} {5(2x+a)^5}
++ ... + \frac {a^{2n-1}} {(2n-1)(2x+a)^{2n-1}} + ...]$
 \lstinputlisting[language=c, frame=single, caption=Программа четвертого задания, label=lab2_2, style=CStyle]{../seventhTask.c}
 
 \subsection{Задание 8}

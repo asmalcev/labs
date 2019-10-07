@@ -4,3 +4,4 @@ a.out
 *.log
 *.gz
 .vscode
+*.out

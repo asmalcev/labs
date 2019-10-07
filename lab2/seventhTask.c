@@ -1,16 +1,14 @@
 #include <stdio.h>
-#include <math.h> 
+#include <math.h>
 
 int main () {
-  double x, a, s;
+  double x, a = 1, s = 0;
   int n = 0;
   scanf("%lf", &x);
-  a = 0.5;
-  s = 0.5 + a;
   while (fabs(a) > 1e-5) {
     n++;
-    a *= -pow(x, 2) / n;
     s += a;
+    a *= -pow(x, 2) / (2*n - 1) / (2*n);
   }
-  printf("s=%lf\n cos(%lf)=%lf\n", s, x, cos(x));
+  printf("s=%lf\ncos(%lf)=%lf\n", s, x, cos(x));
 }
