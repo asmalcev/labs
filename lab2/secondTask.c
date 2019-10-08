@@ -4,7 +4,11 @@
 int main() {
     float s,a,b;
     scanf("%f %f", &a, &b);
-    if (b > 0 && 2.5*a + 3 * b > - pow(2, 0.5))
-    s = (sin(pow(a, 3)) + 2*pow(cos(b), 2)) /
-         pow(2.5*a + 3*b + pow(2, 0.5), 0.5) / log(b);
+    if (b > 0 && 2.5*a + 3 * b > - sqrt(2)) {
+      s = (sin(pow(a, 3)) + 2*pow(cos(b), 2)) /
+           (sqrt(2.5*a + 3*b + sqrt(2)) * log(b));
+      printf("%lf", s);
+    } else {
+      printf("не входит в ООФ\n");
+    }
 }
