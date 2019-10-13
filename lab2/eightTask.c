@@ -6,7 +6,7 @@ int main () {
   int n = 1;
   scanf ("%lf %lf", &x, &a);
   if (x + a <= 0 || x <= 0) {
-    printf("Input error");
+    printf("Input error\n");
     return 0;
   }
   s = log(x);
