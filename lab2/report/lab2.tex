@@ -42,7 +42,9 @@
     basicstyle=\footnotesize,
     breakatwhitespace=false,         
     breaklines=true,                 
-    captionpos=b,                    
+    captionpos=b,
+    %caption = {[Текст] программа},
+    caption = {},              
     keepspaces=true,                 
     numbers=left,                    
     numbersep=5pt,                  
@@ -86,6 +88,7 @@
 
 \section{Цель работы}
 Познакомиться с функциями из математической библиотеки, освоить операции отношения и логические операции, научиться грамотно программировать базовые алгоритмические структуры «ветвление» и «цикл».
+\setcounter{page}{2}
 
 \section{Ход работы}
 \subsection{Задание 1}
@@ -105,7 +108,10 @@ f(m,n) =
 \includegraphics[scale=0.6]{lab2-1.png}
 Схема программы
 \end{center}
-\lstinputlisting[language=c, frame=single, caption=Программа первого задания, label=lab2_2, style=CStyle]{../firstTask.c}
+\lstinputlisting[language=c, frame=single, caption=Программа первого задания, style=CStyle]{../firstTask.c}
+\begin{center}
+Текст программы
+\end{center}
 \begin{center}
 \begin{tabular}{|l|l|}
 \hline
@@ -131,7 +137,10 @@ $S = \displaystyle\frac{ \sin \alphaup^3 + 2\cos^2\betaup }{\sqrt{2,5\alphaup + 
 \includegraphics[scale=0.6]{lab2-2.png}
 Схема программы
 \end{center}
-\lstinputlisting[language=c, frame=single, caption=Программа второго задания, label=lab2_2, style=CStyle]{../secondTask.c}
+\lstinputlisting[language=c, frame=single, caption=Программа второго задания, style=CStyle]{../secondTask.c}
+\begin{center}
+Текст программы
+\end{center}
 \begin{center}
 \begin{tabular}{|l|l|}
 \hline
@@ -156,6 +165,9 @@ a = 10, b = 6 & Недопустимое значение\\
 Схема программы
 \end{center}
 \lstinputlisting[language=c, frame=single, caption=Программа третьего задания, label=lab2_2, style=CStyle]{../thirdTask.c}
+\begin{center}
+Текст программы
+\end{center}
 \begin{center}
 \begin{tabular}{|l|l|}
 \hline
@@ -182,6 +194,9 @@ x1 = 2, y1 = 6, x2 = 4, y2 = 8, x3 = 6, y3 = 7 & yes\\
 \end{center}
 \lstinputlisting[language=c, frame=single, caption=Программа четвертого задания, label=lab2_2, style=CStyle]{../fourthTask.c}
 \begin{center}
+Текст программы
+\end{center}
+\begin{center}
 \begin{tabular}{|p{7cm}|p{7cm}|}
 \hline
 \multicolumn{1}{|c|}{Исходные данные}& \multicolumn{1}{|c|}{Вывод программы}\\
@@ -201,7 +216,10 @@ x1 = 2, y1 = 6, x2 = 4, y2 = 8, x3 = 6, y3 = 7 & yes\\
 \includegraphics[scale=0.6]{lab2-5.png}\\
 Схема программы
 \end{center}
-\lstinputlisting[language=c, frame=single, caption=Программа четвертого задания, label=lab2_2, style=CStyle]{../fivthTask.c}
+\lstinputlisting[language=c, frame=single, caption=Программа пятого задания, label=lab2_2, style=CStyle]{../fivthTask.c}
+\begin{center}
+Текст программы
+\end{center}
 \begin{center}
 \begin{tabular}{|l|l|}
 \hline
@@ -225,7 +243,10 @@ a,b,c = 3,3,3 | 30,2,5 | b,4,4 & 46.000000\\
 \includegraphics[scale=0.6]{lab2-6.png}\\
 Схема программы
 \end{center}
-\lstinputlisting[language=c, frame=single, caption=Программа четвертого задания, label=lab2_2, style=CStyle]{../sixthTask.c}
+\lstinputlisting[language=c, frame=single, caption=Программа шестого задания, label=lab2_2, style=CStyle]{../sixthTask.c}
+\begin{center}
+Текст программы
+\end{center}
 \begin{center}
 \begin{tabular}{|l|l|}
 \hline
@@ -241,9 +262,9 @@ n = 8172374162734 & b = 4372614732718\\
 \end{center}
 
 \subsection{Задание 7}
-Вычислить значение суммы членов бесконечного ряда\\
-$S = ln x + \displaystyle2[\frac {a} {2x+a} + \frac {a^3} {3(2x+a)^3} + \frac {a^5} {5(2x+a)^5}
-+ ... + \frac {a^{2n-1}} {(2n-1)(2x+a)^{2n-1}} + ...]$\\
+Вычислить значение суммы бесконечного ряда\\
+$f(x) = 1 - \displaystyle\frac{x^2}{2!} + \frac{x^4}{4!} - ... + \frac{(-1)^nx^{2n}}{(2n)!} + ...$\\
+с заданной точностью e = $10^{-5}$ и значение функции (для проверки) y = cosx. 
 \textit{Исходные данные:} Введеное число может быть больших размеров поэтому используем тип double для x.\\
 \textit{Результирующие данные:} Сумма элементов будет хранится в S типа double.\\
 \textit{Дополнительные переменные:} Для ускорения работы программы введем переменные типа double x2, для хранения квадрата x, n2, для хранения квадрата n, a, для хранения n-ого элемента последовательности. В качестве счетчика элементов последовательности используем n типа int.\\
@@ -251,7 +272,10 @@ $S = ln x + \displaystyle2[\frac {a} {2x+a} + \frac {a^3} {3(2x+a)^3} + \frac {a
 \includegraphics[scale=0.6]{lab2-7.png}\\
 Схема программы
 \end{center}
-\lstinputlisting[language=c, frame=single, caption=Программа четвертого задания, label=lab2_2, style=CStyle]{../seventhTask.c}
+\lstinputlisting[language=c, frame=single, caption=Программа седьмого задания, label=lab2_2, style=CStyle]{../seventhTask.c}
+\begin{center}
+Текст программы
+\end{center}
 \begin{center}
 \begin{tabular}{|l|l|l|}
 \hline
@@ -267,7 +291,10 @@ x = -9 & -0.911130 & s = -0.911129\\
 \end{center}
 
 \subsection{Задание 8}
-В программе смоделирован арифметический цикл с помощью оператора цикла for.\\
+Вычислить значение суммы членов бесконечного ряда\\
+$S = ln x + \displaystyle2[\frac {a} {2x+a} + \frac {a^3} {3(2x+a)^3} + \frac {a^5} {5(2x+a)^5}
++ ... + \frac {a^{2n-1}} {(2n-1)(2x+a)^{2n-1}} + ...]$\\
+c точностью до члена ряда, меньшего  e = $10^{-4}$ для $a^2<(2x+a)^2$, и значение функции (для проверки) f = ln(x+a).\\
 \textit{Исходные данные:} Введеные числа могут быть больших размеров поэтому используем тип double для x и a.\\
 \textit{Результирующие данные:} Сумма элементов будет хранится в S типа double.\\
 \textit{Дополнительные переменные:} Для ускорения работы программы введем переменные типа double x2, для хранения квадрата x, b, для хранения n-ого элемента последовательности, k, для хранения коэфициента частного между элементами последовательности. В качестве счетчика элементов последовательности используем n типа int.\\
@@ -275,7 +302,10 @@ x = -9 & -0.911130 & s = -0.911129\\
 \includegraphics[scale=0.6]{lab2-8.png}\\
 Схема программы
 \end{center}
-\lstinputlisting[language=c, frame=single, caption=Программа четвертого задания, label=lab2_2, style=CStyle]{../eightTask.c}
+\lstinputlisting[language=c, frame=single, caption=Программа восьмого задания, label=lab2_2, style=CStyle]{../eightTask.c}
+\begin{center}
+Текст программы
+\end{center}
 \begin{center}
 \begin{tabular}{|l|l|l|}
 \hline
@@ -291,7 +321,10 @@ x = 9, a = -2 & 1.94591 & s = 1.94591\\
 \end{center}
 
 \subsection{Задание 9}
-В программе смоделирован арифметический цикл с помощью оператора цикла for.\\
+Вычислить:\\
+\begin{center}
+\includegraphics[scale=1]{formula.png}
+\end{center}
 \textit{Исходные данные:} Считывать пользовательский ввод не требуется.\\
 \textit{Результирующие данные:} Произведение сумм элементов будет хранится в P типа double.\\
 \textit{Дополнительные переменные:} Счетчиками циклов взяты i и j типа char, вспомогательная перменная для хранения суммы элементов вложенного цикла - a, типа double.\\
@@ -299,7 +332,10 @@ x = 9, a = -2 & 1.94591 & s = 1.94591\\
 \includegraphics[scale=0.6]{lab2-9.png}\\
 Схема программы
 \end{center}
-\lstinputlisting[language=c, frame=single, caption=Программа четвертого задания, label=lab2_2, style=CStyle]{../ninthTask.c}
+\lstinputlisting[language=c, frame=single, caption=Программа девятого задания, label=lab2_2, style=CStyle]{../ninthTask.c}
+\begin{center}
+Текст программы
+\end{center}
 \begin{center}
 \begin{tabular}{|p{7cm}|p{7cm}|}
 \hline
