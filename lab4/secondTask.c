@@ -19,11 +19,6 @@ int main() {
       s = i;
     }
   }
-  // int *b = (int *)malloc((n-1) * sizeof(int));
-  // memcpy(b, a, s * sizeof *a);
-  // memcpy(b + s, a + s + 1, (n - s) * sizeof *a);
-  // free(a);
-  // a = b;
   memcpy(a + s, a + s + 1, (n - s) * sizeof *a);
   for (int i = 0; i < n - 1; i++) printf("%d ", a[i]);
   free(a);

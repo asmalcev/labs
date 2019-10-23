@@ -36,8 +36,8 @@ int main(){
   b = n = y = 1.7;
   printf("b=%d\ty=%f\tn=%lf\n", b, y, n);  // print("b=%d\ty=%f\tn=%lf\n", b, y, n);
   printf("*a=%d\t*x=%f\t*m=%lf\n", *a, *x, *m);
-  // m++; 
-  m += 2;
+  m++; 
+  // m += 2;
   printf("n=%lf\tn=%p\tm=%p\n", n, &n, m);
   *m = (float)*a - n + (int)*x;
   printf("m=%p\t*m=%lf\n", m, *m);
