@@ -2,19 +2,19 @@
 #include <stdlib.h>
 
 int main() {
-  int m = 3, n = 3, p = 3, flag, sFlag;
-  // scanf("%d %d %d", &m, &n, &p);
-  int*** cont = (int***) malloc(p * sizeof(int**));
+  short m, n, p, flag, sFlag;
+  scanf("%d %d %d", &m, &n, &p);
+  double*** cont = (double***) malloc(p * sizeof(double**));
   for (short i = 0; i < p; i++) {
-    cont[i] = (int**) malloc(n * sizeof(int*));
+    cont[i] = (double**) malloc(n * sizeof(double*));
     for (short j = 0; j < n; j++)
-      cont[i][j] = (int*) malloc(m * sizeof(int));
+      cont[i][j] = (double*) malloc(m * sizeof(double));
   }
   sFlag = 0;
   for (short i = 0; i < m; i++)
     for (short j = 0; j < n; j++)
       for (short k = 0; k < p; k++)
-        scanf("%d", &cont[i][j][k]);
+        scanf("%le", &cont[i][j][k]);
 
   for (short i = 0; i < m; i++) {
     flag = 1;

@@ -2,16 +2,15 @@
 #include <stdlib.h>
 
 int main() {
-  int n;
-  scanf("%d", &n);
-  int *a = (int*)malloc(n*n * sizeof(int));
-  for (int i = 0; i < n; i++)
-    for (int j = 0; j < n; j++)
-      scanf("%d", &a[i*n + j]);
-  int isSym = 1;
-  for (int i = 0; i < n - 1 && isSym; i++)
-    for (int j = 0; j < n && isSym; j++)
+  short n;
+  scanf("%hd", &n);
+  double *a = (double*)malloc(n*n * sizeof(double));
+  for (short i = 0; i < n; i++)
+    for (short j = 0; j < n; j++)
+      scanf("%le", &a[i*n + j]);
+  char isSym = 1;
+  for (short i = 0; isSym && i < n; i++)
+    for (short j = 0; isSym && j < n; j++)
       isSym = a[i*n + j] == a[j*n + i] ? 1 : 0;
-  printf("matrix %s sym\n", isSym ? "is" : "is't");
-  free(a);
+  printf("matrix %s sym\n", isSym ? "is" : "isn't");
 }

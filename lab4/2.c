@@ -3,23 +3,24 @@
 #include <stdlib.h>
 
 int main() {
-  int n, x, y, m, s;
-  scanf("%d", &n);
-  int *a = (int *)malloc(n * sizeof(int));
-  for (int i = 0; i < n; i++) scanf("%d", &a[i]);
-  scanf("%d %d", &x, &y);
-  m = y;
+  short n, s;
+  double x, y;
+  scanf("%hd", &n);
+  double *a = (double *)malloc(n * sizeof(double)), * i;
+  for (i = a; i - a < n; i++) scanf("%le", i);
+  scanf("%le %le", &x, &y);
   if (y < 0) {
     printf("y < 0");
     return 0;
   }
-  for (int i = 0; i < n; i++) {
-    if (a[i] < m && a[i] >= x && a[i] <= y) {
-      m = a[i];
-      s = i;
+  for (i = a; i - a < n; i++) {
+    if (*i < y && *i >= x) {
+      y = *i;
+      s = (short) (i - a);
     }
   }
   memcpy(a + s, a + s + 1, (n - s) * sizeof *a);
-  for (int i = 0; i < n - 1; i++) printf("%d ", a[i]);
+  for (i = a; i - a < n - 1; i++) printf("%lf ", *i);
+  printf("\n");
   free(a);
 }

@@ -10,18 +10,12 @@ int main(){
   float *p2 = &b;
   double *p3 = &c;
   void *p4;
-  printf("a:      int: start address %p \
-  extent %d\n", &a, sizeof(a));
-  printf("b:    float: start address %p \
-  extent %d\n", &b, sizeof(b));
-  printf("c:   double: start address %p \
-  extent %d\n\n", &c, sizeof(c));
-  printf("p1: pointer: start address %p \
-  extent %d\n", &p1, sizeof(p1));
-  printf("p2: pointer: start address %p \
-  extent %d\n", &p2, sizeof(p2));
-  printf("p3: pointer: start address %p \
-  extent %d\n\n", &p3, sizeof(p3));
+  printf("a:      int: start address %p extent %d\n", &a, sizeof(a));
+  printf("b:    float: start address %p extent %d\n", &b, sizeof(b));
+  printf("c:   double: start address %p extent %d\n\n", &c, sizeof(c));
+  printf("p1: pointer: start address %p extent %d\n", &p1, sizeof(p1));
+  printf("p2: pointer: start address %p extent %d\n", &p2, sizeof(p2));
+  printf("p3: pointer: start address %p extent %d\n\n", &p3, sizeof(p3));
   printf("p1: %p related value %d\n",p1,*p1); 
   printf("p2: %p related value %f\n",p2,*p2);
   printf("p3: %p related value %lf\n\n",p3,*p3); 
@@ -35,8 +29,7 @@ int main(){
   p3=(double*) p2;
   p4 = p2;
   printf("p1=%p\tp2=%p\tp3=%p\tp4=%p\n", p1, p2, p3, p4); 
-  printf("*p1=%d\t*p2=%f\t*p3=%lf\t*(float*)p4=\
-  %f\n\n", *p1, *p2, *p3, *(float*) p4); 
+  printf("*p1=%d\t*p2=%f\t*p3=%lf\t*(float*)p4=%f\n\n", *p1, *p2, *p3, *(float*) p4); 
   p1++;
   p3--;
   printf("p1=%p\tp2=%p\tp3=%p\n", p1, p2, p3); 
