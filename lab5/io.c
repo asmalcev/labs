@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int* readArray(int length) {
-  int* arr = (int*) malloc(length * sizeof(int));
-  for (short i = 0; i < length; i++)
-    scanf("%d", &arr[i]);
+double* readArray(int length) {
+  double* arr = (double*) malloc(length * sizeof(double));
+  for (double* i = arr; i - arr < length; i++)
+    scanf("%lf", i);
   return arr;
 }
 
-void printArray(int* arr, int length) {
-  for (short i = 0; i < length; i++)
-    printf("%d ", arr[i]);
+void printArray(double* arr, int length) {
+  for (double* i = arr; i - arr < length; i++)
+    printf("%lf ", *i);
   printf("\n");
 }
