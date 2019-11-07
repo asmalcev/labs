@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
     printf("can't open %s\n", name);
     remove("output");
     fclose(fw);
-    return 0;
+    return 1;
   }
   printFile("input: ", fr);
 
@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
   while (!feof(fr)) {
     fgets(line, 100, fr);
     for (int i = 0; i < strlen(line); i++) {
-      long long number = toInteger(findWord(line + i, &i));
+      long long number = toInteger(findNumber(line + i, &i));
       fprintf(fw, "%lld", number % 2 ? number : number * 2);
       if (line[i] == '\n' || line[i] == ' ') fputc(line[i], fw);
     }

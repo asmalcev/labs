@@ -1,8 +1,10 @@
 #include "functions.c"
+#include <ctype.h>
+#include <locale.h>
 
 int isLowercase(char* word) {
   while(*word != '\0')
-    if (*word > 'A' && *word++ < 'Z')
+    if (*word == toupper(*word++))
       return 0;
   return 1;
 }
@@ -22,22 +24,21 @@ int main(int argc, char *argv[]) {
     printf("can't open %s\n", name);
     remove("output");
     fclose(fw);
-    return 0;
+    return 1;
   }
   printFile("input: ", fr);
 
   char* line = (char*)malloc(200 * sizeof(char));
   while (!feof(fr)) {
     fgets(line, 200, fr);
-    printf("line length = %ld\n", strlen(line));
     for (int i = 0; i < strlen(line); i++) {
       char* word = findWord(line + i, &i);
-      printf("got %s\n", word);
-      if (isLowercase(word)) {
+      if (isLowercase(word))
         fprintf(fw, "%s", word);
-        if (line[i] == ' ') fputs(" ", fw);
-      }
-      if (line[i] == '\n') fputs("\n", fw);
+      if (line[i] == '\n'
+      || line[i] == '.'
+      || line[i] == ','
+      || line[i] == ' ') fputc(line[i], fw);
     }
   }
 
