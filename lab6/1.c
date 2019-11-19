@@ -7,21 +7,19 @@
 int main() {
   char* str = (char*) malloc(LENGTH * sizeof(char));
   fgets(str, LENGTH * sizeof(char), stdin);
-  char* p = strchr(str, '.');
-  if (p == NULL) {
+  if (strchr(str, '.') == NULL) {
     printf("string doesn't have .\n");
     return 0;
   }
-  short newLength = (int) (p-str) * sizeof(char);
-  str = (char*) realloc(str, newLength);
   short k = 0, count = 0;
-  for (short i = 0; i < newLength; i++) {
-    if (str[i] != ' ')
+  for (short i = 0; i < strlen(str) - 2; i++) {
+    if (str[i] != ' ' && str[i] != ',')
       k++;
-    else
+    else {
+      if (k >= 5)
+        count++;
       k = 0;
-    if (k == 5)
-      count++;
+    }
   }
   printf("%d\n", count);
   free(str);

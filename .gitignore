@@ -5,3 +5,5 @@ a.out
 *.gz
 .vscode
 *.out
+*.fls
+*fdb_latexmk

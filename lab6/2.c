@@ -4,6 +4,18 @@
 
 #define LENGTH 200
 
+char* parse(const char* input, const int length);
+
+int main() {
+  char* str = (char*) malloc(LENGTH * sizeof(char));
+  char* resultStr;
+  fgets(str, LENGTH * sizeof(char), stdin);
+  resultStr = parse(str, LENGTH);
+  fputs(resultStr, stdout);
+  free(str);
+  free(resultStr);
+}
+
 char* parse(const char* input, const int length) {
   char* output = (char*) malloc(length * sizeof(char));
   for (short i = 0; i < strlen(input); i++) {
@@ -63,14 +75,4 @@ char* parse(const char* input, const int length) {
   }
   
   return output;
-}
-
-int main() {
-  char* str = (char*) malloc(LENGTH * sizeof(char));
-  char* resultStr;
-  fgets(str, LENGTH * sizeof(char), stdin);
-  resultStr = parse(str, LENGTH);
-  fputs(resultStr, stdout);
-  free(str);
-  free(resultStr);
 }
