@@ -16,8 +16,9 @@ int main() {
 
 double Integral(double a, double b, double (*func) (double)) {
   double s = 0, dx = (b - a) / N;
-  for (double x = a; x < b; x += dx)
-    s += func(x);
+  int i = 0;
+  for (double x = a; x < b; x += dx, i++)
+    s += (i == N ? 1 : i % 3 == 0 ? 2 : 3)* func(x);
 
   return s * 3*(b - a) / (8*N);
 }

@@ -13,3 +13,9 @@ void printArray(double* arr, int length) {
     printf("%lf ", *i);
   printf("\n");
 }
+
+int inputLength(int max) {
+  int length;
+  while (!scanf("%d", &length) || (length < 0 || length > max));
+  return length;
+}
