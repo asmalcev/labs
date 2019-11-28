@@ -1,50 +1,68 @@
 #include "functions.c"
 #include <ctype.h>
-#include <locale.h>
-
-int isLowercase(char* word) {
-  while(*word != '\0')
-    if (*word == toupper(*word++))
-      return 0;
-  return 1;
-}
 
 int main(int argc, char *argv[]) {
-  char name[20] = "";
+  char file_name[30] = "";
   if (argc == 1) {
-    fgets(name, 20, stdin);
-    name[strlen(name) - 1] = '\0';
+    printf("Enter file name: ");
+    scanf("%s", file_name);
+  } else {
+    strcat(file_name, argv[1]);
   }
-  else
-    strcat(name, argv[1]);
   
-  FILE *fr = fopen(name, "r");
-  FILE *fw = fopen("output", "w+");
-  if (fr == NULL) {
-    printf("can't open %s\n", name);
+  FILE *file_r = fopen(file_name, "r");
+  FILE *file_w = fopen("output", "w+");
+  if (file_r == NULL) {
+    printf("can't open %s\n", file_name);
     remove("output");
-    fclose(fw);
+    fclose(file_w);
     return 1;
   }
-  printFile("input: ", fr);
+  printFile("input: ", file_r);
 
-  char* line = (char*)malloc(200 * sizeof(char));
-  while (!feof(fr)) {
-    fgets(line, 200, fr);
-    for (int i = 0; i < strlen(line); i++) {
-      char* word = findWord(line + i, &i);
-      if (isLowercase(word))
-        fprintf(fw, "%s", word);
-      if (line[i] == '\n'
-      || line[i] == '.'
-      || line[i] == ','
-      || line[i] == ' ') fputc(line[i], fw);
+  char buffer[300], current_char = fgetc(file_r), phraseFlag = 0, wordFlag = 1, endFileFlag = 0;
+  size_t j = 0;
+  while (!endFileFlag) {
+    switch (current_char) {
+    case '.':
+      buffer[j++] = '.';
+      buffer[j] = '\0';
+      j = 0;
+      if (phraseFlag) {
+        fputs(buffer, file_w);
+      }
+      phraseFlag = 0;
+      wordFlag = 0;
+      break;
+
+    case EOF:
+      buffer[j] = '\0';
+      if (phraseFlag) {
+        fputs(buffer, file_w);
+      }
+      endFileFlag = 1;
+      break;
+
+    case ' ':
+      buffer[j++] = ' ';
+      if (wordFlag == 1) {
+        phraseFlag = 1;
+      }
+      wordFlag = 1;
+      break;
+    
+    default:
+      if (current_char != '\n' && (current_char == toupper(current_char) || (current_char >= -112 && current_char <= -81))) {
+        wordFlag = 0;
+      }
+      buffer[j++] = current_char;
+      break;
     }
+    current_char = fgetc(file_r);
   }
 
-  free(line);
   printf("\n");
-  printFile("output: ", fw);
-  fclose(fr);
-  fclose(fw);
+  printFile("output: ", file_w);
+  fclose(file_r);
+  fclose(file_w);
 }

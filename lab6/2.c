@@ -42,9 +42,8 @@ char* parse(const char* input, const int length) {
       strncpy(sup, input + i + 3, (bracket - input - i - 2) * sizeof(char));
       i += strlen(sup) + 2;
 
-      if (strstr(sup, "tan") != NULL || strchr(sup, '%') != NULL) {
+      if (strstr(sup, "tan") != NULL || strchr(sup, '%') != NULL)
         sup = parse(sup, strlen(sup));
-      }
 
       strcat(output, "sin");
       strcat(output, sup);
@@ -60,7 +59,7 @@ char* parse(const char* input, const int length) {
       
       if (posDiv < 0 && posTg < 0) {
         strcat(output, input + i);
-        break; // for on 9th line
+        break;
       } else if (posDiv < 0) {
         countOfSymb = posTg;
       } else if (posTg < 0) {
