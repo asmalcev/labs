@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
   }
 
   FILE *file_r = fopen(file_name, "r");
-  FILE *file_w = fopen("output", "w+");
+  FILE *file_w = fopen("output2", "w+");
   if (file_r == NULL) {
     printf("can't open %s\n", file_name);
     remove("output");

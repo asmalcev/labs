@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
     return 1;
   }
   char* line = (char*)malloc(200 * sizeof(char));
-  printFile("input:", file_r);
+  printFile("input: ", file_r);
 
   double first = 1, last;
   long indexF, indexL, countNegative = 0;
