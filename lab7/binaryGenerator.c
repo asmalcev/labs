@@ -1,7 +1,7 @@
 #include "functions.c"
  
 int main() {
-  FILE* file = fopen("input.bin", "wb");
+  FILE* file = fopen("input.bin", "wb+");
   if (file == NULL) {
     printf("Error opening file");
     return 1;
@@ -11,10 +11,11 @@ int main() {
   fgets(line, 100, stdin);
   line[strlen(line) - 1] = ' ';
   while (strcmp(line, "end ") != 0) {
-    fputs(line, file);
+    fprintf(file, "%lf ", atof(line));
     fgets(line, 100, stdin);
     line[strlen(line) - 1] = ' ';
   }
+  printFile("file:", file);
   
   free(line);
   fclose(file);

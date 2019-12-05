@@ -17,47 +17,42 @@ int main(int argc, char *argv[]) {
     fclose(file_w);
     return 1;
   }
-  char* line = (char*)malloc(200 * sizeof(char));
   printFile("input: ", file_r);
 
-  double first = 1, last;
-  long indexF, indexL, countNegative = 0;
+  double number, first = 1, last;
+  long indexF, indexL, countNegative = 0, j;
   while (!feof(file_r)) {
-    fgets(line, 200, file_r);
-    for (int i = 0, j = 0; i < strlen(line); i++, j++) {
-      double number = atof(findNumber(line + i, &i));
-      if (number < 0) {
-        if (first > 0) {
-          first = number;
-          indexF = j;
-        } else {
-          last = number;
-          indexL = j;
-        }
-        countNegative++;
+    fscanf(file_r, "%lf", &number);
+    if (number < 0) {
+      if (first > 0) {
+        first = number;
+        indexF = j;
+      } else {
+        last = number;
+        indexL = j;
       }
+      countNegative++;
     }
+    j++;
   }
   fseek(file_r, 0, SEEK_SET);
+  j = 0;
 
   while (!feof(file_r)) {
-    fgets(line, 200, file_r);
-    for (int i = 0, j = 0; i < strlen(line); i++, j++) {
-      double number = atof(findNumber(line + i, &i));
-      if (j == indexF) {
-        fprintf(file_w, "%lf ", last);
-      } else if (j == indexL) {
-        fprintf(file_w, "%lf ", first);
-      } else {
-        fprintf(file_w, "%lf ", number);
-      }
+    fscanf(file_r, "%lf", &number);
+    if (j == indexF) {
+      fprintf(file_w, "%lf ", last);
+    } else if (j == indexL) {
+      fprintf(file_w, "%lf ", first);
+    } else {
+      fprintf(file_w, "%lf ", number);
     }
+    j++;
   }
   fprintf(file_w, "%ld ", countNegative);
   printf("\n");
   printFile("output: ", file_w);
 
-  free(line);
   fclose(file_r);
   fclose(file_w);
 }

@@ -19,17 +19,12 @@ int main(int argc, char *argv[]) {
   }
   printFile("input: ", file_r);
 
-  char* line = (char*)malloc(200 * sizeof(char));
+  long long number;
   while (!feof(file_r)) {
-    fgets(line, 200, file_r);
-    for (int i = 0; i < strlen(line); i++) {
-      long long number = atoi(findNumber(line + i, &i));
-      fprintf(file_w, "%lld", number % 2 ? number : number * 2);
-      if (line[i] == '\n' || line[i] == ' ') fputc(line[i], file_w);
-    }
+    fscanf(file_r, "%lld", &number);
+    fprintf(file_w, "%lld ", number % 2 ? number : number * 2);
   }
 
-  free(line);
   printf("\n");
   printFile("output: ", file_w);
   fclose(file_r);

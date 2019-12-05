@@ -3,6 +3,14 @@
 #include <string.h>
 #include <math.h>
 
+struct note {
+  int id;
+  char name[30];
+  char speed[5];
+  int deposit;
+  char date[9];
+};
+
 void printFile(char* title, FILE* fileName) {
   fseek(fileName, 0, SEEK_SET);
   
@@ -16,7 +24,7 @@ void printFile(char* title, FILE* fileName) {
   fseek(fileName, 0, SEEK_SET);
 }
 
-char* fileName;
+char fileName[30];
 
 void help() {
   printf(">> COMMAND - DESCRIPTION\n   c [FILENAME] - create or make clear if exists file [FILENAME]\n");
@@ -26,25 +34,26 @@ void help() {
 void fileHelp() {
   printf(">> EDITING FILE COMMAND:\n   COMMAND - DESCRIPTION\n   c [ID] [PERSON NAME] [CATEGORY] [DEPOSIT] [DATE] - create new note\n");
   printf("   p - print the bigest deposit\n   e [ID] [PERSON NAME] [CATEGORY] [DEPOSIT] [DATE] - change [ID] note \n");
-  printf("   - [ID] [SUM] - get [SUM] from [ID] account\n   - [ID] [SUM] - put [SUM] on [ID] account\n   d [ID] - delete note [ID]\n   q - quit\n");
+  printf("   + [ID] [SUM] - get [SUM] from [ID] account\n   - [ID] [SUM] - put [SUM] on [ID] account\n   d [ID] - delete note [ID]\n   q - quit\n");
 }
 
-void deleteNote(char* id, FILE* f) {
+void clear(FILE* f) {
+  while (getc(f) != '\n');
+}
+
+void deleteNote(int id, FILE* f) {
   FILE* newFile = fopen("supportFile.bin", "wb");
   fseek(f, 0, SEEK_SET);
-  char* line = (char*)malloc(200 * sizeof(char));
+  struct note memo;
   
   while (!feof(f)) {
-    fgets(line, 200, f);
-    char* lineId = strtok(line, " ");
-    char* lineOther = strtok(NULL, "");
-    if (strcmp(lineId, id) != 0 && lineOther != NULL && lineId != NULL) {
-      fprintf(newFile, "%s %s", lineId, lineOther);
+    fscanf(f, "%d %s %s %d %s\n", &memo.id, memo.name, memo.speed, &memo.deposit, memo.date);
+    if (id != memo.id) {
+      fprintf(newFile, "%d %s %s %d %s\n", memo.id, memo.name, memo.speed, memo.deposit, memo.date);
     }
   }
   fseek(f, -1, SEEK_END);
 
-  free(line);
   fclose(newFile);
   fclose(f);
   remove(fileName);
@@ -52,24 +61,19 @@ void deleteNote(char* id, FILE* f) {
   f = fopen(fileName, "ab+");
 }
 
-void editNote(char* id, char* newData, FILE* f) {
+void editNote(int id, char* name, char* speed, int deposit, char* date, FILE* f) {
   FILE* newFile = fopen("supportFile.bin", "wb");
   fseek(f, 0, SEEK_SET);
-  char* line = (char*)malloc(200 * sizeof(char));
+  struct note memo;
   
   while (!feof(f)) {
-    fgets(line, 200, f);
-    char* lineId = strtok(line, " ");
-    char* lineOther = strtok(NULL, "");
-    if (lineOther != NULL) {
-      if (strcmp(lineId, id) != 0)
-        fprintf(newFile, "%s %s", lineId, lineOther);
-      else
-        fprintf(newFile, "%s %s\n", lineId, newData);
-    }
+    fscanf(f, "%d %s %s %d %s\n", &memo.id, memo.name, memo.speed, &memo.deposit, memo.date);
+    if (id != memo.id)
+      fprintf(newFile, "%d %s %s %d %s\n", memo.id, memo.name, memo.speed, memo.deposit, memo.date);
+    else
+      fprintf(newFile, "%d %s %s %d %s\n", memo.id, name, speed, deposit, date);
   }
   
-  free(line);
   fclose(newFile);
   fclose(f);
   remove(fileName);
@@ -86,56 +90,36 @@ void fileDoc(FILE* f) {
 
 void printBigestDeposit(FILE* f) {
   fseek(f, 0, SEEK_SET);
-  char* line = (char*)malloc(200 * sizeof(char)),
-      * lineId,
-      * name,
-      * speed;
-  long long deposit, maxDeposit = 0;
+  struct note memo;
+  int maxDeposit = 0;
   
   while (!feof(f)) {
-    fgets(line, 200, f);
-    lineId = strtok(line, " ");
-    name = strtok(NULL, " ");
-    if (name != NULL) {
-      speed = strtok(NULL, " ");
-      if(!strcmp(speed, "fast")) {
-        deposit = atoi(strtok(NULL, " "));
-        if (maxDeposit < deposit)
-          maxDeposit = deposit;
-      }
+    fscanf(f, "%d %s %s %d %s\n", &memo.id, memo.name, memo.speed, &memo.deposit, memo.date);
+    if(!strcmp(memo.speed, "fast")) {
+      memo.deposit = memo.deposit;
+      if (maxDeposit < memo.deposit)
+        maxDeposit = memo.deposit;
     }
   }
-  printf(">> The bigest deposit is %lld\n", maxDeposit);
-  
-  free(line);
+  printf(">> The bigest deposit is %d\n", maxDeposit);
 }
 
-void changeDeposit(char* id, char* sum, short isSum, FILE* f) {
+void changeDeposit(int id, int sum, short isSum, FILE* f) {
   FILE* newFile = fopen("supportFile.bin", "wb");
   fseek(f, 0, SEEK_SET);
-  char* line = (char*)malloc(200 * sizeof(char)),
-      * lineId,
-      * lineOther;
+  struct note memo;
   
   while (!feof(f)) {
-    fgets(line, 200, f);
-    lineId = strtok(line, " ");
-    lineOther = strtok(NULL, "");
-    if (lineOther != NULL) {
-      if (strcmp(lineId, id) != 0) {
-        fprintf(newFile, "%s %s", lineId, lineOther);
+    fscanf(f, "%d %s %s %d %s\n", &memo.id, memo.name, memo.speed, &memo.deposit, memo.date);
+      if (id != memo.id) {
+        fprintf(newFile, "%d %s %s %d %s\n", memo.id, memo.name, memo.speed, memo.deposit, memo.date);
       } else {
-        char* name = strtok(lineOther, " "),
-            * speed = strtok(NULL, " "),
-            * deposit = strtok(NULL, " ");
-        lineOther = strtok(NULL, "");
-        long long result =  atoi(deposit) + atoi(sum) * (isSum? 1 : -1);
+        int result = memo.deposit + sum * (isSum? 1 : -1);
         if (result >= 0)
-          fprintf(newFile, "%s %s %s %lld %s", lineId, name, speed, result, lineOther);
+          fprintf(newFile, "%d %s %s %d %s\n", memo.id, memo.name, memo.speed, result, memo.date);
       }
-    }
   }
-  free(line);
+
   fclose(newFile);
   fclose(f);
   remove(fileName);
@@ -144,80 +128,77 @@ void changeDeposit(char* id, char* sum, short isSum, FILE* f) {
 }
 
 void fileWork(FILE* f) {
-  int flag = 1;
-  char* inputString = (char*)malloc(100 * sizeof(char)),
-      * command,
-      * option1, 
-      * option2;
+  int flag = 1, difference;
+  char command;
+  struct note memo;
   while (flag) {
     printf("<< ");
-    fgets(inputString, 200, stdin);
-    inputString[strlen(inputString) - 1] = '\0';
-    command = strtok(inputString, " ");
+    scanf("%c", &command);
 
-    switch (*inputString) {
+    switch (command) {
       case 'c':
-        fprintf(f, "%s\n", strtok(NULL, ""));
+        scanf("%d %s %s %d %s", &memo.id, memo.name, memo.speed, &memo.deposit, memo.date);
+        clear(stdin);
+        fprintf(f, "%d %s %s %d %s\n", memo.id, memo.name, memo.speed, memo.deposit, memo.date);
         fileDoc(f);
         break;
 
       case 'e':
-        option1 = strtok(NULL, " "), option2 = strtok(NULL, "");
-        editNote(option1, option2, f);
+        scanf("%d %s %s %d %s", &memo.id, memo.name, memo.speed, &memo.deposit, memo.date);
+        clear(stdin);
+        editNote(memo.id, memo.name, memo.speed, memo.deposit, memo.date, f);
         fileDoc(f);
         break;
       
       case 'd':
-        deleteNote(strtok(NULL, " "), f);
+        scanf("%d", &memo.id);
+        clear(stdin);
+        deleteNote(memo.id, f);
         fileDoc(f);
         break;
       
       case 'p':
+        clear(stdin);
         printBigestDeposit(f);
         break;
       
       case '+':
-        option1 = strtok(NULL, " "), option2 = strtok(NULL, "");
-        changeDeposit(option1, option2, 1, f);
-        fileDoc(f);
-        break;
-
       case '-':
-        option1 = strtok(NULL, " "), option2 = strtok(NULL, "");
-        changeDeposit(option1, option2, 0, f);
+        scanf("%d %d", &memo.id, &difference);
+        clear(stdin);
+        changeDeposit(memo.id, difference, command == '+' ? 1 : 0, f);
         fileDoc(f);
         break;
 
       case 'q':
         flag = 0;
+        clear(stdin);
         system("clear");
         help();
         break;
 
       default:
+        clear(stdin);
         printf("error: unknown command\n");
         fileHelp();
     }
   }
-
-  free(inputString);
 }
 
 int main() {
   system("clear");
   int flag = 1;
-  char* inputString = (char*)malloc(100 * sizeof(char)), * command;
+  char command;
   FILE *f;
   help();
   while (flag) {
     printf("<< ");
-    fgets(inputString, 100, stdin);
-    inputString[strlen(inputString) - 1] = '\0';
-    command = strtok(inputString, " ");
+    scanf("%c", &command);
 
-    switch (*inputString) {
+    switch (command) {
       case 'c':
-        fileName = strtok(NULL, "");
+        scanf("%s", fileName);
+        clear(stdin);
         f = fopen(fileName, "wb");
         if (f == NULL)
           printf("error: could't create %s\n", fileName);
@@ -227,7 +208,8 @@ int main() {
         break;
       
       case 'r':
-        fileName = strtok(NULL, "");
+        scanf("%s", fileName);
+        clear(stdin);
         f = fopen(fileName, "ab+");
         remove(fileName);
         printf(">> %s doesn't exist now\n", fileName);
@@ -235,14 +217,16 @@ int main() {
         break;
 
       case 'p':
-        fileName = strtok(NULL, "");
+        scanf("%s", fileName);
+        clear(stdin);
         f = fopen(fileName, "rb");
         printf(">> %s:\n", fileName);
         printFile(">> ", f);
         break;
 
       case 'o':
-        fileName = strtok(NULL, "");
+        scanf("%s", fileName);
+        clear(stdin);
         f = fopen(fileName, "ab+");
         if (f == NULL)
           printf("error: could't open %s\n", fileName);
@@ -259,10 +243,9 @@ int main() {
         break;
       
       default:
+        clear(stdin);
         printf("error: unknown command\n");
         help();
     }
   }
-
-  free(inputString);
 }

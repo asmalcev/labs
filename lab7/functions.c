@@ -5,16 +5,15 @@
 
 void printFile(char* title, FILE* fileName) {
   fseek(fileName, 0, SEEK_SET);
-  char* line = (char*)malloc(200 * sizeof(char));
+  char c = fgetc(fileName);
   
   printf("%s", title);
-  while (!feof(fileName)) {
-    fgets(line, 200, fileName);
-    printf("%s", line);
+  while (c != EOF) {
+    printf("%c", c);
+    c = fgetc(fileName);
   }
   printf("\n");
   
-  free(line);
   fseek(fileName, 0, SEEK_SET);
 }
 
