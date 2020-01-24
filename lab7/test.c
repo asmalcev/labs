@@ -1,17 +1,15 @@
-#include <stdio.h>
+#include "functions.c"
 
-struct note {
-  int id;
-  char name[30];
-  char speed[5];
-  int deposit;
-  char date[9];
-};
+int main(int argc, char *argv[]) {
+  FILE* file = fopen("input.bin", "ab+");
+  unsigned int b[8];
 
-int main() {
-  struct note memo;
-  char input[] = "1 Alex fast 4000 19.11.12";
+  fseek(file, 0 * sizeof(double), SEEK_SET);
+  fread(b, sizeof(unsigned int), 1, file);
 
-  sscanf(input, "%d %s %s %d %s", &memo.id, memo.name, memo.speed, &memo.deposit, memo.date);
-  printf("%s has %d\n", memo.name, memo.deposit);
+  fseek(file, 0, SEEK_END);
+  fwrite(b, sizeof(unsigned int), 1, stdout);
+
+
+  fclose(file);
 }

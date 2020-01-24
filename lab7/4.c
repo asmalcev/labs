@@ -11,6 +11,85 @@ struct note {
   char date[9];
 };
 
+void printFile(char*, FILE*);
+
+char fileName[30];
+
+void help();
+void fileHelp();
+void clear(FILE*);
+void deleteNote(int, FILE*);
+void editNote(int, char*, char*, int, char*, FILE*);
+void fileDoc(FILE*);
+void printBigestDeposit(FILE*);
+void changeDeposit(int, int, short, FILE*);
+void fileWork(FILE*);
+
+int main() {
+  system("clear");
+  int flag = 1;
+  char command;
+  FILE *f;
+  help();
+  while (flag) {
+    printf("<< ");
+    scanf("%c", &command);
+
+    switch (command) {
+      case 'c':
+        scanf("%s", fileName);
+        clear(stdin);
+        f = fopen(fileName, "wb");
+        if (f == NULL)
+          printf("error: could't create %s\n", fileName);
+        else
+          printf(">> %s is cleared and exists now\n", fileName);
+        fclose(f);
+        break;
+      
+      case 'r':
+        scanf("%s", fileName);
+        clear(stdin);
+        f = fopen(fileName, "ab+");
+        remove(fileName);
+        printf(">> %s doesn't exist now\n", fileName);
+        fclose(f);
+        break;
+
+      case 'p':
+        scanf("%s", fileName);
+        clear(stdin);
+        f = fopen(fileName, "rb");
+        printf(">> %s:\n", fileName);
+        printFile(">> ", f);
+        break;
+
+      case 'o':
+        scanf("%s", fileName);
+        clear(stdin);
+        f = fopen(fileName, "ab+");
+        if (f == NULL)
+          printf("error: could't open %s\n", fileName);
+        else {
+          fileDoc(f);
+          fileWork(f);
+        }
+        fclose(f);
+        printf(">> %s closed\n", fileName);
+        break;
+
+      case 'q':
+        flag = 0;
+        break;
+      
+      default:
+        clear(stdin);
+        printf("error: unknown command\n");
+        help();
+    }
+  }
+}
+
 void printFile(char* title, FILE* fileName) {
   fseek(fileName, 0, SEEK_SET);
   
@@ -23,8 +102,6 @@ void printFile(char* title, FILE* fileName) {
   
   fseek(fileName, 0, SEEK_SET);
 }
-
-char fileName[30];
 
 void help() {
   printf(">> COMMAND - DESCRIPTION\n   c [FILENAME] - create or make clear if exists file [FILENAME]\n");
@@ -181,71 +258,6 @@ void fileWork(FILE* f) {
         clear(stdin);
         printf("error: unknown command\n");
         fileHelp();
-    }
-  }
-}
-
-int main() {
-  system("clear");
-  int flag = 1;
-  char command;
-  FILE *f;
-  help();
-  while (flag) {
-    printf("<< ");
-    scanf("%c", &command);
-
-    switch (command) {
-      case 'c':
-        scanf("%s", fileName);
-        clear(stdin);
-        f = fopen(fileName, "wb");
-        if (f == NULL)
-          printf("error: could't create %s\n", fileName);
-        else
-          printf(">> %s is cleared and exists now\n", fileName);
-        fclose(f);
-        break;
-      
-      case 'r':
-        scanf("%s", fileName);
-        clear(stdin);
-        f = fopen(fileName, "ab+");
-        remove(fileName);
-        printf(">> %s doesn't exist now\n", fileName);
-        fclose(f);
-        break;
-
-      case 'p':
-        scanf("%s", fileName);
-        clear(stdin);
-        f = fopen(fileName, "rb");
-        printf(">> %s:\n", fileName);
-        printFile(">> ", f);
-        break;
-
-      case 'o':
-        scanf("%s", fileName);
-        clear(stdin);
-        f = fopen(fileName, "ab+");
-        if (f == NULL)
-          printf("error: could't open %s\n", fileName);
-        else {
-          fileDoc(f);
-          fileWork(f);
-        }
-        fclose(f);
-        printf(">> %s closed\n", fileName);
-        break;
-
-      case 'q':
-        flag = 0;
-        break;
-      
-      default:
-        clear(stdin);
-        printf("error: unknown command\n");
-        help();
     }
   }
 }
